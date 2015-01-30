@@ -1,0 +1,30 @@
+{
+  "title" : "Exemple de mapping",
+  "collectionName": "basis_mapping",
+  "filesToIgnore": [ "**/.*", "~*", "*~", "*.sw?", "*.old", "*.bak", "**/node_modules", "Thumbs.db", "**/*.txt", "**/*.txt", "**/*.dotx"],
+  "documentFields" : {
+    "$type" : {
+      "visible": true,
+      "label": "Type",
+      "path" : "name",
+      "truncate" : 11,
+      "shift": 9,
+      "mapping" : {
+        "CH" : "Estimation charges",
+        "CR" : "Compte rendu",
+        "DC" : "Document de cadrage",
+        "DR" : "Document de référence",
+        "FR" : "Formation",
+        "NT" : "Note",
+        "OM" : "Ordre de mission",
+        "PC" : "Procèdure",
+        "PR" : "Présentation",
+        "RA" : "Rapport d'activité",
+        "RS" : "Revue de sprint",
+        "SR" : "Support de réunion",
+        "US" : "User stories",
+        "NA" : "N/A"
+      }
+    }
+  }
+}
