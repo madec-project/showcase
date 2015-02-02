@@ -19,13 +19,17 @@
       "path": "content.json.director"
     },
     "$actors": {
-      "visible": true,
       "label": "Actors",
       "path": "content.json.actors",
       "parseCSV" : "/",
       "foreach": {
         "trim": true
       }
+    },
+    "$vactors": {
+      "label": "Actors",
+      "path": "actors",
+      "join": ", "
     },
     "$text": {
       "get" : ["title", "year", "director", "actors"],
@@ -34,68 +38,54 @@
   },
   "display": {
     "fields": {
-      "content.json.title": "Title",
-      "content.json.year": "Year",
-      "content.json.director": "Director",
-      "actors": "Actors"
+      "title": "Title",
+      "year": "Year",
+      "director": "Director",
+      "vactors": "Actors"
     }
   },
   "corpusFields": {
     "comment": "The corpusFields are not yet functional",
-    "filmsNb": {
+    "$filmsNb": {
       "visible": true,
-      "default": 0,
       "label": "films",
-      "fields": [
-        "wid"
-      ],
-      "selector": {},
-      "operator": "distinct",
-      "transform": "pluck('_id').size()",
-      "type": "Number",
-      "icon": "hand-o-right"
+      "icon": "hand-o-right",
+      "$?": "http://localhost:3000/compute.json?operator=count&field=wid",
+      "get": "data.0.value",
+      "cast": "number"
     },
-    "beginYear": {
+    "$years": {
       "default": 0,
-      "fields": [
-        "content.json.year"
-      ],
-      "operator": "distinct",
-      "transform": "pluck('_id').min()",
-      "type": "Number"
+      "$?": "http://localhost:3000/compute.json?operator=distinct&field=year",
+      "select": ".data .value"
     },
-    "endYear": {
-      "default": 0,
-      "fields": [
-        "content.json.year"
-      ],
-      "operator": "distinct",
-      "transform": "pluck('_id').max()",
-      "type": "Number"
+    "$beginYear": {
+      "compute": "min(years)"
     },
-    "period": {
+    "$endYear": {
+      "compute": "max(years)"
+    },
+    "$period": {
       "visible": true,
-      "default": 0,
-      "template": "${beginYear}-${endYear}",
+      "template": "{{beginYear}}-{{endYear}}",
       "icon": "calendar"
     },
-    "actorsNb": {
+    "$actorsNb": {
       "visible": true,
-      "default": 0,
       "label"  : "actors",
-      "fields" : [ "fields.actors" ],
-      "operator" : "distinct",
+      "icon"   : "star",
+      "$?": "http://localhost:3000/compute.json?operator=distinct&field=actors",
+      "comment": "I don't know how to do that, yet.",
       "transform": "pluck('_id').size()",
-      "type"   : "Number",
-      "icon"   : "star"
+      "cast"   : "number"
     },
     "actorsPerFilm": {
       "visible": true,
       "default": 0,
       "label"  : "actors/film",
+      "icon"   : "star-half-o",
       "compute": "actorsNb / filmsNb",
-      "type"   : "Number",
-      "icon"   : "star-half-o"
+      "cast"   : "number"
     }
   },
   "pages" : {
