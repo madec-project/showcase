@@ -1,0 +1,214 @@
+{
+  "title": "Films",
+  "collectionName": "films",
+  "description": "Several films to demontrate the usage of VISIR",
+  "help": "Artificial corpus on films built to demonstrate the usage of version 6.0.0",
+  "documentFields": {
+    "$title": {
+      "visible": true,
+      "label": "Title",
+      "path": "content.json.title"
+    },
+    "$year": {
+      "visible": true,
+      "label": "Year",
+      "path": "content.json.year"
+    },
+    "$director": {
+      "visible": true,
+      "label": "Director",
+      "path": "content.json.director"
+    },
+    "$actors": {
+      "visible": true,
+      "label": "Actors",
+      "path": "content.json.actors",
+      "parseCSV" : "/",
+      "foreach": {
+        "trim": true
+      }
+    },
+    "$text": {
+      "get" : ["title", "year", "director", "actors"],
+      "join": "|"
+    }
+  },
+  "display": {
+    "fields": {
+      "content.json.title": "Title",
+      "content.json.year": "Year",
+      "content.json.director": "Director",
+      "fields.actors": "Actors"
+    }
+  },
+  "corpusFields": {
+    "comment": "The corpusFields are not yet functional",
+    "filmsNb": {
+      "visible": true,
+      "default": 0,
+      "label": "films",
+      "fields": [
+        "wid"
+      ],
+      "selector": {},
+      "operator": "distinct",
+      "transform": "pluck('_id').size()",
+      "type": "Number",
+      "icon": "hand-o-right"
+    },
+    "beginYear": {
+      "default": 0,
+      "fields": [
+        "content.json.year"
+      ],
+      "operator": "distinct",
+      "transform": "pluck('_id').min()",
+      "type": "Number"
+    },
+    "endYear": {
+      "default": 0,
+      "fields": [
+        "content.json.year"
+      ],
+      "operator": "distinct",
+      "transform": "pluck('_id').max()",
+      "type": "Number"
+    },
+    "period": {
+      "visible": true,
+      "default": 0,
+      "template": "${beginYear}-${endYear}",
+      "icon": "calendar"
+    },
+    "actorsNb": {
+      "visible": true,
+      "default": 0,
+      "label"  : "actors",
+      "fields" : [ "fields.actors" ],
+      "operator" : "distinct",
+      "transform": "pluck('_id').size()",
+      "type"   : "Number",
+      "icon"   : "star"
+    },
+    "actorsPerFilm": {
+      "visible": true,
+      "default": 0,
+      "label"  : "actors/film",
+      "compute": "actorsNb / filmsNb",
+      "type"   : "Number",
+      "icon"   : "star-half-o"
+    }
+  },
+  "pages" : {
+    "index" : {
+      "title"       : "Dashboard",
+      "description" : "Dashboard of the films",
+      "help"        : "The settings for this dashboard are describe in [films.json](https://github.com/madec-project/getting-started-with-visir/blob/master/films.json)."
+    },
+    "chart" : {
+      "title"       : "Chart",
+      "description" : "Chart on films"
+    },
+    "documents" : {
+      "title"       : "List",
+      "description" : "List of films",
+      "help"        : "Some films, with all fields of the CSV file. You can sort by one column (ex: Year), using the arrows."
+    },
+    "fields" : {
+      "title"       : "Fields",
+      "description" : "Fields of the films records",
+      "help"        : "Actors field was split from original file. Each actor was separated one from another using a `/`."
+    },
+    "display" : {
+      "title"       : "Record",
+      "description" : "Film record"
+    }
+  },
+  "dashboard": {
+    "charts": [
+      {
+        "field": "content.json.year",
+        "type": "histogram",
+        "title": "Per year",
+        "size": {
+          "height": 200
+        },
+        "facets": [
+          {
+            "path": "fields.actors",
+            "label": "Actors"
+          },
+          {
+            "path": "content.json.director",
+            "label": "Director"
+          }
+        ]
+      },
+      {
+        "field": "content.json.director",
+        "type": "horizontalbars",
+        "title": "Per director",
+        "size": {
+          "height": 450,
+          "columns": 6
+        },
+        "facets": [
+          {
+            "path": "content.json.year",
+            "label": "Year"
+          },
+          {
+            "path": "fields.actors",
+            "label": "Actors"
+          }
+        ]
+      },
+      {
+        "field": "actors",
+        "type": "horizontalbars",
+        "title": "Per actor",
+        "maxItems": 12,
+        "size": {
+          "height": 450,
+          "columns": 6
+        },
+        "facets": [
+          {
+            "path": "content.json.year",
+            "label": "Year"
+          },
+          {
+            "path": "content.json.director",
+            "label": "Directors"
+          }
+        ]
+      },
+      {
+        "field": "content.json.year",
+        "type": "pie",
+        "title": "Years pie",
+        "legend": {
+          "position": "right",
+          "show": false
+        },
+         "facets": [
+          {
+            "path": "actors",
+            "label": "Actors"
+          },
+          {
+            "path": "content.json.director",
+            "label": "Director"
+          }
+        ]
+      },
+      {
+        "type": "network",
+        "fields": [ "actors" ],
+        "maxItems": 100000,
+        "title": "Actors net",
+        "help": "Links between actors."
+      }
+   ]
+  }
+}
