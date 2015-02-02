@@ -2,7 +2,6 @@
   "title": "Films",
   "collectionName": "films",
   "description": "Several films to demontrate the usage of VISIR",
-  "help": "Artificial corpus on films built to demonstrate the usage of version 6.0.0",
   "documentFields": {
     "$title": {
       "visible": true,
@@ -38,7 +37,7 @@
       "content.json.title": "Title",
       "content.json.year": "Year",
       "content.json.director": "Director",
-      "fields.actors": "Actors"
+      "actors": "Actors"
     }
   },
   "corpusFields": {
@@ -103,7 +102,7 @@
     "index" : {
       "title"       : "Dashboard",
       "description" : "Dashboard of the films",
-      "help"        : "The settings for this dashboard are describe in [films.json](https://github.com/madec-project/getting-started-with-visir/blob/master/films.json)."
+      "help"        : "The settings for this dashboard are describe in [repository.json](https://github.com/madec-project/showcase/blob/master/demo_films/repository.json)."
     },
     "chart" : {
       "title"       : "Chart",
@@ -135,7 +134,7 @@
         },
         "facets": [
           {
-            "path": "fields.actors",
+            "path": "actors",
             "label": "Actors"
           },
           {
@@ -158,7 +157,7 @@
             "label": "Year"
           },
           {
-            "path": "fields.actors",
+            "path": "actors",
             "label": "Actors"
           }
         ]
