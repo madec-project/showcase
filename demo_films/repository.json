@@ -92,7 +92,7 @@
     "index" : {
       "title"       : "Dashboard",
       "description" : "Dashboard of the films",
-      "help"        : "The settings for this dashboard are describe in [repository.json](https://github.com/madec-project/showcase/blob/master/demo_films/repository.json)."
+      "help"        : "The settings for this dashboard are described in [repository.json](https://github.com/madec-project/showcase/blob/master/demo_films/repository.json)."
     },
     "chart" : {
       "title"       : "Chart",
@@ -119,6 +119,7 @@
         "field": "content.json.year",
         "type": "histogram",
         "title": "Per year",
+        "color": "#bdd7e7",
         "size": {
           "height": 200
         },
@@ -137,6 +138,7 @@
         "field": "content.json.director",
         "type": "horizontalbars",
         "title": "Per director",
+        "color": "#6baed6",
         "size": {
           "height": 450,
           "columns": 6
@@ -156,6 +158,7 @@
         "field": "actors",
         "type": "horizontalbars",
         "title": "Per actor",
+        "color": "#2171b5",
         "maxItems": 12,
         "size": {
           "height": 450,
