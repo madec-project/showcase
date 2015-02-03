@@ -1,0 +1,17 @@
+{
+  "collectionName": "basis_compute01",
+  "title" :  "Exemple de champs calculés sur le coprus complet",
+  "description" : " récupérer le nombre de fichiers",
+  "corpusFields" : {
+    "$nbfiles" : {
+      "visible" : true,
+      "label" : "Nombre de fichiers",
+      "$?" : "local:///compute.json?o=count&f=wid",
+      "parseJSON": true,
+      "get#1" : "data",
+      "first": true,
+      "get#2" : "value",
+      "cast" : "number"
+    }
+  }
+}
