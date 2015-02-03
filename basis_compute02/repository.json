@@ -1,0 +1,16 @@
+{
+  "collectionName": "basis_compute02",
+  "title" :  "Exemple de champs calculés à partir de données externes",
+  "description" : " récupérer le nombre de version de castor-core",
+  "corpusFields" : {
+    "$nbversions" : {
+      "visible" : true,
+      "label" : "Nombre de versions",
+      "$?" : "http://registry.npmjs.com/castor-core",
+      "parseJSON": true,
+      "get" : "versions",
+      "size": true,
+      "cast" : "number"
+    }
+  }
+}
