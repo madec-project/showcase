@@ -75,8 +75,7 @@
       "label"  : "actors",
       "icon"   : "star",
       "$?": "http://localhost:3000/compute.json?operator=distinct&field=actors",
-      "comment": "I don't know how to do that, yet.",
-      "transform": "pluck('_id').size()",
+      "length": "true",
       "cast"   : "number"
     },
     "actorsPerFilm": {
