@@ -45,25 +45,31 @@
     }
   },
   "corpusFields": {
-    "comment": "The corpusFields are not yet functional",
     "$filmsNb": {
       "visible": true,
       "label": "films",
       "icon": "hand-o-right",
-      "$?": "http://localhost:3000/compute.json?operator=count&field=wid",
+      "$?": "local:///compute.json?operator=count&field=wid",
+      "parseJSON": true,
       "get": "data.0.value",
       "cast": "number"
     },
     "$years": {
       "default": 0,
-      "$?": "http://localhost:3000/compute.json?operator=distinct&field=year",
-      "select": ".data .value"
+      "$?": "local:///compute.json?operator=distinct&field=year",
+      "parseJSON": true,
+      "select": ".data ._id",
+      "foreach": {
+        "cast": "number"
+      }
     },
     "$beginYear": {
-      "compute": "min(years)"
+      "get": "years",
+      "min": true
     },
     "$endYear": {
-      "compute": "max(years)"
+      "get": "years",
+      "max": true
     },
     "$period": {
       "visible": true,
@@ -74,11 +80,12 @@
       "visible": true,
       "label"  : "actors",
       "icon"   : "star",
-      "$?": "http://localhost:3000/compute.json?operator=distinct&field=actors",
+      "$?": "local:///compute.json?operator=distinct&field=actors",
+      "parseJSON": true,
       "length": "true",
       "cast"   : "number"
     },
-    "actorsPerFilm": {
+    "$actorsPerFilm": {
       "visible": true,
       "default": 0,
       "label"  : "actors/film",
