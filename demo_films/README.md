@@ -1,6 +1,6 @@
 # Films demonstration
 
-This directory contains a basic demonstration of ezvisir (warning, name changing) version 6.0.
+This directory contains a basic demonstration of [ezvis](https://github.com/madec-project/ezvis) version 6+.
 
 ## Launch
 
