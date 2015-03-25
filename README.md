@@ -16,3 +16,5 @@ Then, type:
 ```
 ezvis repository
 ```
+
+> **Note**: `assets` directory is not a case, it contains only assets useful for READMEs.
