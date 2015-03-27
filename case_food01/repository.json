@@ -1,0 +1,438 @@
+{
+   "title": "Food Science & Technology",
+   "documentFields": {
+      "$title": {
+         "visible": true,
+         "label": "Titre",
+         "get": "content.json.xtit",
+         "trim": true
+      },
+      "$publisher": {
+         "visible": true,
+         "label": "Éditeur",
+         "get": "content.json.lot",
+         "mapping": {
+            "els": "Elsevier",
+            "rsc": "Royal Society of Chemistry",
+            "oup": "Oxford University Press"
+         }
+      },
+      "$revue": {
+         "visible": true,
+         "label": "Revue",
+         "get": "content.json.issn",
+         "mapping": {
+            "0168-1605": "International Journal of Food Microbiology",
+            "0260-8774": "Journal of Food Engineering",
+            "0268-005X": "Food Hydrocolloids",
+            "0278-6915": "Food and Chemical Toxicology",
+            "0306-9192": "Food Policy",
+            "0308-8146": "Food Chemistry",
+            "0309-1740": "Meat Science",
+            "0315-5463": "Canadian Institute of Food Science and Technology Journal",
+            "0379-864X": "Chemical Senses",
+            "0924-2244": "Trends in Food Science & Technology",
+            "0925-5214": "Postharvest Biology and Technology",
+            "0950-3293": "Food Quality and Preference",
+            "0956-7135": "Food Control",
+            "0958-6946": "International Dairy Journal",
+            "0963-9969": "Food Research International",
+            "1466-8564": "Innovative Food Science and Emerging Technologies"
+         }
+      },
+      "$year": {
+         "visible": true,
+         "label": "Année",
+         "get": "content.json.date"
+      },
+      "$theme": {
+         "visible": true,
+         "label": "Thème",
+         "get": "content.json.cat_wos",
+         "parseCSV": "/",
+         "remove": "FOOD SCIENCE & TECHNOLOGY"
+      },
+      "$keyword": {
+         "label": "Mot-clé",
+         "get": "content.json.xkw",
+         "trim": true,
+         "parseCSV": "|",
+         "foreach": {
+            "trim": true
+         },
+         "remove": ""
+      },
+      "$url": {
+         "label": "URL",
+         "get": "content.json.ID",
+         "prepend": "https://api.istex.fr/document/",
+         "append": "/fulltext/pdf"
+      },
+      "$text": {
+         "get": [
+            "title",
+            "publisher",
+            "year",
+            "theme",
+            "keyword"
+         ],
+         "join": "|"
+      }
+   },
+   "display": {
+      "fields": {
+         "title": "Titre",
+         "publisher": "Éditeur",
+         "year": "Année de publication",
+         "theme": "Thème(s)",
+         "keyword": "Mot(s)-clé(s)",
+         "url": "URL"
+      }
+   },
+   "pages": {
+      "index": {
+         "title": "Tableau de bord",
+         "description": "Tableau de bord de l'étude",
+         "help": " "
+      },
+      "chart": {
+         "title": "Représentations graphiques",
+         "description": "Détails de l'étude"
+      },
+      "documents": {
+         "title": "Documents",
+         "description": "Références des publications",
+         "help": "Références des publications sous forme de tableau. Accès à la référence détaillée en cliquant sur un des champs."
+      },
+      "fields": {
+         "title": "Champs bibliographiques",
+         "description": "Intitulés des champs bibliographiques",
+         "help": "Champs bibliographiques (en jason) avec leurs nombres d'occurences"
+      },
+      "display": {
+         "title": "Notice",
+         "description": "Notice détaillée"
+      }
+   },
+   "corpusFields": {
+      "$titreInstance": {
+         "visible": true,
+         "icon": "r-globe",
+         "template": "Thématique \"Food Science & Technology\""
+      },
+      "$nbnotices": {
+         "visible": true,
+         "label": "notice(s)",
+         "icon": "globe",
+         "$?": "local:///compute.json?o=count&f=wid",
+         "parseJSON": true,
+         "get": "data.0.value",
+         "cast": "number"
+      },
+      "$dates": {
+         "$?": "local:///compute.json?operator=distinct&field=year&itemsPerPage=10000000",
+         "parseJSON": true,
+         "select": ".data ._id",
+         "foreach": {
+            "cast": "number"
+         }
+      },
+      "$anneeDebut": {
+         "get": "dates",
+         "min": true
+      },
+      "$anneeFin": {
+         "get": "dates",
+         "max": true
+      },
+      "$periode": {
+         "visible": true,
+         "icon": "calendar",
+         "template": "{{anneeDebut}}-{{anneeFin}}"
+      },
+      "$nbannee": {
+         "icon": " ",
+         "visible": true,
+         "default": 0,
+         "label": "année(s)",
+         "get": "dates",
+         "size": true
+      }
+   },
+   "dashboard": {
+      "charts": [
+         {
+            "field": "year",
+            "type": "histogram",
+            "title": "Années",
+            "help": "Répartition des publications par année",
+            "color": "#428BCA",
+            "facets": [
+               {
+                  "path": "publisher",
+                  "label": "Editeurs",
+                  "paging": false,
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "revue",
+                  "label": "Revues",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "theme",
+                  "label": "Thèmes",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "keyword",
+                  "label": "Mots-clés",
+                  "column2": "Nb Publi"
+               }
+            ]
+         },
+         {
+            "field": "publisher",
+            "type": "pie",
+            "title": "Éditeurs",
+            "help": "Répartition des publications par éditeur",
+            "legend": "bottom",
+            "colors": [
+               "#a6cee3",
+               "#1f78b4",
+               "#b2df8a",
+               "#33a02c",
+               "#fb9a99",
+               "#e31a1c",
+               "#fdbf6f",
+               "#ff7f00",
+               "#cab2d6",
+               "#6a3d9a"
+            ],
+            "size": {
+               "height": 440,
+               "columns": 4
+            },
+            "facets": [
+               {
+                  "path": "year",
+                  "label": "Années",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "revue",
+                  "label": "Revues",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "theme",
+                  "label": "Thèmes",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "keyword",
+                  "label": "Mots-clés",
+                  "column2": "Nb Publi"
+               }
+            ]
+         },
+         {
+            "field": "revue",
+            "type": "horizontalbars",
+            "title": "Revues",
+            "help": "Répartition des publications par revue",
+            "color": "#b2df8a",
+            "labels": {
+               "International Journal of Food Microbiology": "Int J Food Microb",
+               "Journal of Food Engineering": "J Food Eng",
+               "Food Hydrocolloids": "Food Hydroc",
+               "Food and Chemical Toxicology": "Food Chem Tox",
+               "Food Policy": "Food Policy",
+               "Food Chemistry": "Food Chem",
+               "Meat Science": "Meat Sci",
+               "Canadian Institute of Food Science and Technology Journal": "Can Inst Food Sci Techn J",
+               "Chemical Senses": "Chem Senses",
+               "Trends in Food Science & Technology": "Trends Food Sci Techn",
+               "Postharvest Biology and Technology": "Postharv Bio Techn",
+               "Food Quality and Preference": "Food Qual Pref",
+               "Food Control": "Food Control",
+               "International Dairy Journal": "Int Dairy J",
+               "Food Research International": "Food Res Int",
+               "Innovative Food Science and Emerging Technologies": "Innov Food Sci Emerg Techn"
+            },
+            "size": {
+               "height": 440,
+               "columns": 7,
+               "offset": 1
+            },
+            "facets": [
+               {
+                  "path": "year",
+                  "label": "Années",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "publisher",
+                  "label": "Editeurs",
+                  "paging": false,
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "theme",
+                  "label": "Thèmes",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "keyword",
+                  "label": "Mots-clés",
+                  "column2": "Nb Publi"
+               }
+            ]
+         },
+         {
+            "type": "network",
+            "fields": [
+               "publisher",
+               "revue"
+            ],
+            "fieldsColor": {
+               "publisher": "#80cdc1",
+               "revue": "#b2df8a"
+            },
+            "title": "Réseau de relations entre les éditeurs et les revues",
+            "help": "Réseau asymétrique entre éditeurs et revues",
+            "facets": [
+               {
+                  "path": "year",
+                  "label": "Années",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "publisher",
+                  "label": "Editeurs",
+                  "paging": false,
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "revue",
+                  "label": "Revues",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "theme",
+                  "label": "Thèmes",
+                  "column2": "Nb Publi"
+               }
+            ]
+         },
+         {
+            "field": "theme",
+            "type": "horizontalbars",
+            "title": "Thèmes",
+            "help": "Répartition des publications par thème (\"Subject Category\" du JCR)",
+            "color": "#40004b",
+            "size": {
+               "height": 440,
+               "columns": 6
+            },
+            "facets": [
+               {
+                  "path": "year",
+                  "label": "Années",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "publisher",
+                  "label": "Editeurs",
+                  "paging": false,
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "revue",
+                  "label": "Revues",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "keyword",
+                  "label": "Mots-clés",
+                  "column2": "Nb Publi"
+               }
+            ]
+         },
+         {
+            "field": "keyword",
+            "type": "horizontalbars",
+            "title": "Mots-clés",
+            "help": "Répartition des publications par mot clé",
+            "maxItems": 18,
+            "color": "#9970ab",
+            "size": {
+               "height": 440,
+               "columns": 5,
+               "offset": 1
+            },
+            "facets": [
+               {
+                  "path": "year",
+                  "label": "Années",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "publisher",
+                  "label": "Editeurs",
+                  "paging": false,
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "revue",
+                  "label": "Revues",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "theme",
+                  "label": "Thèmes",
+                  "column2": "Nb Publi"
+               }
+            ]
+         },
+         {
+            "type": "network",
+            "fields": [
+               "keyword"
+            ],
+            "maxItems": 105,
+            "threshold": 5,
+            "title": "Réseau de relations entre mots clés (plus de 5 publications en relation)",
+            "help": "Réseau symétrique entre mots clés",
+            "fieldsColor": {
+               "keyword": "#9970ab"
+            },
+            "facets": [
+               {
+                  "path": "year",
+                  "label": "Années",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "publisher",
+                  "label": "Editeurs",
+                  "paging": false,
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "revue",
+                  "label": "Revues",
+                  "column2": "Nb Publi"
+               },
+               {
+                  "path": "theme",
+                  "label": "Thèmes",
+                  "column2": "Nb Publi"
+               }
+            ]
+         }
+      ]
+   },
+   "collectionName": "case_food01",
+   "app": "ezvis-6.4.0"
+}
