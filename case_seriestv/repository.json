@@ -1,0 +1,755 @@
+{
+  "title": "Séries télévisées",
+  "description": "107 Références issues de PASCAL et FRANCIS sur les séries télévisées",
+  "collectionName": "seriestv2",
+  "itemsPerPage": 25,
+  "filters": {"objectPath": "objectPath"},
+  "documentFields": {
+    "$Year": {
+      "visible": true,
+      "path": "content.json.Date",
+      "label": "Année"
+    },
+    "$title": {
+      "visible": true,
+      "path": "content.json.Titre",
+      "label": "Titre"
+    },
+    "$MotCle": {
+      "label": "Mot(s) clé(s)",
+      "get": "content.json.MotCle",
+      "parseCSV": ";",
+      "remove": "",
+      "foreach": {
+        "trim": true
+      },
+      "deduplicate" : true,
+      "remove": "Série télévisée"
+    },
+    "$Thematique": {
+      "label": "Thématique(s)",
+      "path": "content.json.TNP",
+      "parseCSV": ";",
+      "remove": "",
+      "foreach": {
+        "trim": true
+      },
+      "deduplicate" : true
+    },
+    "$SousThematique": {
+      "label": "Sous Thématique(s)",
+      "path": "content.json.STNP",
+      "parseCSV": ";",
+      "remove": "",
+      "foreach": {
+        "trim": true
+      },
+      "deduplicate" : true
+    },
+    "$Source": {
+      "label": "Source",
+      "path": "content.json.Source"
+    },
+    "$Pays": {
+      "label": "Pays",
+      "path": "content.json.PaysENG",
+      "parseCSV": ";",
+      "remove": "",
+      "foreach": {
+        "trim": true
+      },
+      "deduplicate" : true
+    },
+    "$Auteur": {
+      "label": "Auteur(s)",
+      "path": "content.json.Auteur",
+      "parseCSV": ";",
+      "remove": "",
+      "foreach": {
+        "trim": true
+      },
+      "deduplicate" : true
+    },
+    "$Langue": {
+      "label": "Langue(s)",
+      "path": "content.json.Langue",
+      "parseCSV": ";",
+      "remove": "",
+      "foreach": {
+        "trim": true
+      },
+      "deduplicate" : true
+    },
+    "$vAuteur": {
+      "label": "Auteur(s)",
+      "path": "Auteur",
+      "join": "; "
+    },
+    "$vThematique": {
+      "visible": true,
+      "label": "Thématique(s)",
+      "path": "Thematique",
+      "join": "; "
+    },
+    "$vSousThematique": {
+      "visible": true,
+      "label": "Sous Thématique(s)",
+      "path": "SousThematique",
+      "join": "; "
+    },
+    "$vMotCle": {
+      "visible": true,
+      "label": "Mot(s) Clé(s)",
+      "path": "MotCle",
+      "join": "; "
+    },
+    "$vPays": {
+      "visible": true,
+      "label": "Pays",
+      "path": "Pays",
+      "join": "; "
+    },
+    "$Identifiant": {
+      "visible": true,
+      "path": "content.json.Identifiant",
+      "label": "Identifiant"
+    },
+    "$PaysCarto": {
+      "label": "Pays",
+      "path": "content.json.PaysENG",
+      "parseCSV": ";",
+      "foreach": {
+        "trim": true,
+        "mapping": {
+          "AUSTRALIA": "AUS",
+          "BELGIUM": "BEL",
+          "CANADA": "CAN",
+          "UNITED STATES": "USA",
+          "CHINA": "CHN",
+          "DENMARK": "DNK",
+          "FINLAND": "FIN",
+          "FRANCE": "FRA",
+          "GERMANY": "DEU",
+          "NETHERLANDS": "NLD",
+          "NEW ZEALAND": "NZL",
+          "NORWAY": "NOR",
+          "POLAND": "POL",
+          "SLOVENIA": "SVN",
+          "SOUTH AFRICA": "ZAF",
+          "ZIMBABWE": "ZWE",
+          "SPAIN": "ESP",
+          "UNITED KINGDOM": "GBR",
+          "SWEDEN": "SWE",
+          "TURKEY": "TUR"
+        }
+      }
+    },
+    "$text": {
+      "get": [
+        "title",
+        "Year",
+        "MotCle",
+        "Thematique",
+        "SousThematique",
+        "Auteur",
+        "Pays",
+        "Identifiant"
+      ],
+      "join": "|"
+    }
+  },
+  "display": {
+    "fields": {
+      "title": "Titre",
+      "Year": "Année de publication",
+      "vAuteur": "Auteur(s)",
+      "Source": "Source",
+      "content.json.Issn": "ISSN",
+      "content.json.Vl": "Volume",
+      "content.json.Num": "Numéro",
+      "content.json.Pagination": "Pagination",
+      "content.json.Langue": "Langue",
+      "content.json.Resume": "Résumé",
+      "vThematique": "Thématique(s)",
+      "vSousThematique": "Sous Thématique(s)",
+      "vMotCle": "Mot(s) clé(s)",
+      "vPays": "Pays",
+      "content.json.Url": "URL",
+      "Identifiant": "Identifiant"
+    },
+    "fieldsPerPage": 25
+  },
+  "pages": {
+    "index": {
+      "title": "Tableau de bord",
+      "description": "Tableau de bord de l'étude",
+      "help": " "
+    },
+    "chart": {
+      "title": "Représentations graphiques",
+      "description": "Détails de l'étude"
+    },
+    "documents": {
+      "title": "Documents",
+      "description": "Références des publications",
+      "help": "Références des publications sous forme de tableau. Accès à la référence détaillée en cliquant sur un des champs."
+    },
+    "fields": {
+      "title": "Champs bibliographiques",
+      "description": "Intitulés des champs bibliographiques",
+      "help": "Champs bibliographiques (en jason) avec leurs nombres d'occurences"
+    },
+    "display": {
+      "title": "Notice",
+      "description": "Notice détaillée"
+    }
+  },
+  "dashboard": {
+    "charts": [
+      {
+        "field": "Year",
+        "type": "histogram",
+        "title": "Années",
+        "help": "Répartition annuelle des publications",
+        "size": {
+          "height": 400
+        },
+        "color": "#428BCA",
+        "facets": [
+          {
+            "path": "Thematique",
+            "label": "Thématiques",
+            "help": "Nombre de publications par thématique",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "SousThematique",
+            "label": "Sous Thématiques",
+            "help": "Nombre de publications par sous thématique",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "MotCle",
+            "label": "Mots Clés",
+            "help": "Nombre de publications par mot clé",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Langue",
+            "label": "Langue",
+            "help": "Nombre de publications par langue",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Source",
+            "label": "Source",
+            "help": "Nombre de publications par source (périodique)",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Pays",
+            "label": "Pays",
+            "help": "Nombre de publications par pays",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Auteur",
+            "label": "Auteurs",
+            "help": "Nombre de publications par auteur",
+            "column2": "Nb Publi"
+          }
+        ]
+      },
+      {
+        "field": "Thematique",
+        "type": "pie",
+        "title": "Thématiques",
+        "help": "Répartition des publications par thématique (verbalisation des codes de classement (4 digits Pascal))",
+        "colors": [
+          "#8dd3c7",
+          "#ffffb3",
+          "#bebada",
+          "#fb8072",
+          "#80b1d3",
+          "#fdb462",
+          "#b3de69"
+        ],
+        "legend": {
+          "position": "bottom"
+        },
+        "size": {
+          "height": 440,
+          "columns": 4
+        },
+        "groupPercent": 5,
+        "groupedTitle": "Exact Sciences and Technology",
+        "labels": {
+          "Applied Sciences": "Appl Sci",
+          "Fundamental and Applied Biological Sciences. Psychology": "Fund & Appli Biol Sci. Psychol",
+          "Medical Sciences": "Med Sci",
+          "Sciences and Techniques of General Use": "Sci & Tech Gen Use",
+          "Social Sciences & Humanities": "Social Sci & Human"
+        },
+        "facets": [
+          {
+            "path": "content.json.Date",
+            "label": "Années",
+            "help": "Nombre de publications par année",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "SousThematique",
+            "label": "Sous Thématiques",
+            "help": "Nombre de publications par sous thématique",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "MotCle",
+            "label": "Mots Clés",
+            "help": "Nombre de publications par mot clé",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Langue",
+            "label": "Langue",
+            "help": "Nombre de publications par langue",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Source",
+            "label": "Source",
+            "help": "Nombre de publications par source (périodique)",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Pays",
+            "label": "Pays",
+            "help": "Nombre de publications par pays",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Auteur",
+            "label": "Auteurs",
+            "help": "Nombre de publications par auteur",
+            "column2": "Nb Publi"
+          }
+        ]
+      },
+      {
+        "field": "SousThematique",
+        "type": "horizontalbars",
+        "title": "Sous Thématiques",
+        "help": "Répartition des publications par sous thématique (verbalisation des codes de classement (3 Digits Francis / 6 Digits Pascal))",
+        "maxItems": 20,
+        "legend": {
+          "show": false
+        },
+        "color": "#8c6bb1",
+        "size": {
+          "height": 440,
+          "columns": 7,
+          "offset": 1
+        },
+        "labels": {
+          "Surgery (General Aspects). Transplantations, Organ and Tissue Grafts. Graft Diseases": "Surgery (General Aspects) …",
+          "Medical Sciences. Investigative & Diagnostic Techniques": "Medical Sciences. Investigative …",
+          "Public Health. Hygiene-Occupational Medicine": "Public Health. Hygiene …",
+          "Computer Science. Control Theory. Systems": "Computer Science. Control Theory …",
+          "Telecommunications and Information Theory": "Telecommunications & Information …",
+          "History and Sciences of Litterature": "History & Sciences of Litterature",
+          "Information Science. Documentation": "Information Science. Documentation",
+          "History of Science and Technology": "History of Science & Technology",
+          "Medical Sciences. General Aspects": "Medical Sciences. General Aspects",
+          "Otorhinolaryngology. Stomatology": "Otorhinolaryngology. Stomatology",
+          "Psychology. Psychophysiology": "Psychology. Psychophysiology",
+          "Psychopathology. Psychiatry": "Psychopathology. Psychiatry",
+          "Infectious Diseases": "Infectious Diseases",
+          "Psychoanalysis": "Psychoanalysis",
+          "BGI / PRODIG": "BGI / PRODIG",
+          "Linguistics": "Linguistics",
+          "Philosophy": "Philosophy",
+          "Toxicology": "Toxicology",
+          "Ethnology": "Ethnology",
+          "Neurology": "Neurology",
+          "Sociology": "Sociology"
+        },
+        "facets": [
+          {
+            "path": "content.json.Date",
+            "label": "Années",
+            "help": "Nombre de publications par année",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Thematique",
+            "label": "Thématiques",
+            "help": "Nombre de publications par thématique",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "MotCle",
+            "label": "Mots Clés",
+            "help": "Nombre de publications par mot clé",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Langue",
+            "label": "Langue",
+            "help": "Nombre de publications par langue",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Source",
+            "label": "Source",
+            "help": "Nombre de publications par source (périodique)",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Pays",
+            "label": "Pays",
+            "help": "Nombre de publications par pays",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Auteur",
+            "label": "Auteurs",
+            "help": "Nombre de publications par auteur",
+            "column2": "Nb Publi"
+          }
+        ]
+      },
+      {
+        "field": "MotCle",
+        "type": "horizontalbars",
+        "title": "Mots Clés",
+        "help": "Répartition des publications par mot clé (plus de 5 publications)",
+        "maxItems": 23,
+        "legend": {
+          "show": false
+        },
+        "color": "#bedb89",
+        "size": {
+          "height": 440
+        },
+        "facets": [
+          {
+            "path": "content.json.Date",
+            "label": "Années",
+            "help": "Nombre de publications par année",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Thematique",
+            "label": "Thématiques",
+            "help": "Nombre de publications par thématique",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "SousThematique",
+            "label": "Sous Thématiques",
+            "help": "Nombre de publications par sous thématique",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Langue",
+            "label": "Langue",
+            "help": "Nombre de publications par langue",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Source",
+            "label": "Source",
+            "help": "Nombre de publications par source (périodique)",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Pays",
+            "label": "Pays",
+            "help": "Nombre de publications par pays",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Auteur",
+            "label": "Auteurs",
+            "help": "Nombre de publications par auteur",
+            "column2": "Nb Publi"
+          }
+        ]
+      },
+      {
+        "type": "network",
+        "fields": [
+          "MotCle"
+        ],
+        "threshold": 3,
+        "title": "Réseau de relations entre mots clés (plus de 3 publications en relation)",
+        "help": "Réseau symétrique entre mots clés",
+        "facets": [
+          {
+            "path": "content.json.Date",
+            "label": "Années",
+            "help": "Nombre de publications par année",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Thematique",
+            "label": "Thématiques",
+            "help": "Nombre de publications par thématique",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "SousThematique",
+            "label": "Sous Thématiques",
+            "help": "Nombre de publications par sous thématique",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Langue",
+            "label": "Langue",
+            "help": "Nombre de publications par langue",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Source",
+            "label": "Source",
+            "help": "Nombre de publications par source (périodique)",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Pays",
+            "label": "Pays",
+            "help": "Nombre de publications par pays",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Auteur",
+            "label": "Auteurs",
+            "help": "Nombre de publications par auteur",
+            "column2": "Nb Publi"
+          }
+        ]
+      },
+      {
+        "type": "network",
+        "fields": ["Thematique","MotCle"],
+        "threshold": 3,
+        "fieldsColor": {
+          "MotCle": "#80cdc1",
+          "Thematique": "#dadaeb"
+        },
+        "centerOn": ["Social Sciences & Humanities"],
+        "nodes": [{
+          "field": "Thematique",
+          "value": "Social Sciences & Humanities",
+          "color": "#6a3d9a"
+        }],
+        "title": "Réseau de relations (plus de 3 co-publications) entre les thématiques et les mots clés",
+        "help": "Réseau asymétrique entre thématiques (centré sur la thématique \"Social Sciences & Humanities\") et mots clés",
+        "facets": [
+          {
+            "path": "content.json.Date",
+            "label": "Années",
+            "help": "Nombre de publications par année",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "SousThematique",
+            "label": "Sous Thématiques",
+            "help": "Nombre de publications par sous thématique",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Langue",
+            "label": "Langue",
+            "help": "Nombre de publications par langue",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Source",
+            "label": "Source",
+            "help": "Nombre de publications par source (périodique)",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Pays",
+            "label": "Pays",
+            "help": "Nombre de publications par pays",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Auteur",
+            "label": "Auteurs",
+            "help": "Nombre de publications par auteur",
+            "column2": "Nb Publi"
+          }
+        ]
+      },
+      {
+        "field": "Pays",
+        "type": "horizontalbars",
+        "title": "Pays",
+        "help": "Répartition des publications par pays",
+        "legend": {
+          "show": false
+        },
+        "color": "#2c7fb8",
+        "size": {
+          "height": 440
+        },
+        "facets": [
+          {
+            "path": "content.json.Date",
+            "label": "Années",
+            "help": "Nombre de publications par année",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Thematique",
+            "label": "Thématiques",
+            "help": "Nombre de publications par thématique",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "SousThematique",
+            "label": "Sous Thématiques",
+            "help": "Nombre de publications par sous thématique",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Langue",
+            "label": "Langue",
+            "help": "Nombre de publications par langue",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Source",
+            "label": "Source",
+            "help": "Nombre de publications par source (périodique)",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Auteur",
+            "label": "Auteurs",
+            "help": "Nombre de publications par auteur",
+            "column2": "Nb Publi"
+          }
+        ]
+      },
+      {
+        "type": "map",
+        "fields": [
+          "PaysCarto"
+        ],
+        "title": "Pays - Cartographie",
+        "help": "Répartition des publications par pays",
+        "colors": {
+          "scale": "OrRd",
+          "distrib": "log"
+        },
+        "facets": [
+          {
+            "path": "content.json.Date",
+            "label": "Années",
+            "help": "Nombre de publications par année",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Thematique",
+            "label": "Thématiques",
+            "help": "Nombre de publications par thématique",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "SousThematique",
+            "label": "Sous Thématiques",
+            "help": "Nombre de publications par sous thématique",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Langue",
+            "label": "Langue",
+            "help": "Nombre de publications par langue",
+            "paging": false,
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Source",
+            "label": "Source",
+            "help": "Nombre de publications par source (périodique)",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Pays",
+            "label": "Pays",
+            "help": "Nombre de publications par pays",
+            "column2": "Nb Publi"
+          },
+          {
+            "path": "Auteur",
+            "label": "Auteurs",
+            "help": "Nombre de publications par auteur",
+            "column2": "Nb Publi"
+          }
+        ]
+      }
+    ]
+  },
+  "corpusFields": {
+    "$titreInstance": {
+      "visible": true,
+      "icon": "film",
+      "template": "Séries télévisées"
+    },
+  "$nbnotices": {
+      "visible": true,
+      "label": "publications",
+      "icon": "globe",
+      "$?": "local:///compute.json?operator=count&field=wid",
+      "parseJSON": true,
+      "get": "data.0.value",
+      "cast": "number"
+    },
+    "$years": {
+      "default": 0,
+      "$?": "local:///compute.json?operator=distinct&field=Year",
+      "parseJSON": true,
+      "select": ".data ._id",
+      "foreach": {
+        "cast": "number"
+      }
+    },
+    "$beginYear": {
+      "get": "years",
+      "min": true
+    },
+    "$endYear": {
+      "get": "years",
+      "max": true
+    },
+    "$period": {
+      "visible": true,
+      "template": "{{beginYear}}-{{endYear}}",
+      "icon": "calendar"
+    }
+  }
+}
