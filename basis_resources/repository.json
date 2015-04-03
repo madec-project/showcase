@@ -1,0 +1,25 @@
+{
+  "title" :  "Exemple de ressources",
+  "collectionName": "basis_resources",
+  "loaders": [
+    {
+      "script": "castor-load-csv",
+      "pattern": "**/*.csv"
+    },
+    {
+      "script": "castor-load-json",
+      "pattern": "**/*.json"
+    }
+  ],
+  "resources" : {
+    "packages" : {
+      "url" : [
+        "https://raw.githubusercontent.com/castorjs/castor-load-xml/master/package.json",
+        "https://raw.githubusercontent.com/castorjs/castor-load-xmlcorpus/master/package.json",
+        "https://raw.githubusercontent.com/castorjs/castor-load-raw/master/package.json",
+        "https://raw.githubusercontent.com/castorjs/castor-load-custom/master/package.json",
+        "https://raw.githubusercontent.com/castorjs/castor-load-csv/master/package.json"
+      ]
+    }
+  }
+}
