@@ -1,0 +1,32 @@
+{
+  "title" :  "Exemple de champs volants",
+  "collectionName": "basis_flying",
+  "flyingFields" : {
+    "bestname" : {
+      "path": ["name", "basename"],
+      "transform" : "pad(9,'0')"
+    },
+    "ratio" : {
+      "compute" : "filesize / maxsize"
+    },
+    "toto" : {
+      "path" : "value",
+      "name" : "truc",
+      "mask" : "basename,filetype,directory"
+    }
+
+  },
+  "corpusFields" : {
+    "maxsize" : {
+      "default" : 0,
+      "label" : "Taille maxi",
+      "fields" : [
+        "filesize"
+      ],
+      "selector" : {},
+      "operator" : "distinct",
+      "transform" : "pluck('_id').parseJSON().max()",
+      "type" : "Number"
+    }
+  }
+}
