@@ -1,0 +1,10 @@
+{
+  "collectionName": "basis_loader_tsv",
+  "title"   :  "Example of TSV loading",
+  "loaders" : [
+    {
+      "script": "castor-load-csv",
+      "pattern": "**/*.tsv"
+    }
+  ]
+}
