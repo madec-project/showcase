@@ -895,7 +895,7 @@
       },
       "$dates": {
          "default": 0,
-         "$?": "local:///compute.json?operator=distinct&field=dateSansTiret",
+         "$?": "local:///compute.json?operator=distinct&field=dateSansTiret&itemsPerPage=",
          "parseJSON": true,
          "select": ".data ._id",
          "foreach": {
